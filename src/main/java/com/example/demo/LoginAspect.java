@@ -19,11 +19,11 @@ public class LoginAspect {
 	@Pointcut("execution(public * com.example.demo.controller..*(..))")
 	private void contMethod() {
 	}
-
 	@Before("contMethod()")
 	public void before(JoinPoint joinPoint) {
 		String methodName = joinPoint.getSignature().toShortString();
-		HttpServletRequest request =(HttpServletRequest)joinPoint.getArgs()[0];
+		HttpServletRequest request =(HttpServletRequest)joinPoint.getArgs()[0]; 
+		//joinPoint를 HttpServletRequest로 캐스팅 했기 때문에 controller에도 매개변수에 HttpServletRequest를 해줘야한다
 		String uri = request.getRequestURI();
 		String ip = request.getRemoteAddr();
 		String time = new Date().toLocaleString();
@@ -42,9 +42,6 @@ public class LoginAspect {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
-		
-		
-		
 //		System.out.println("요청한 uri"+uri);
 		System.out.println(methodName+"메소드 동작전이다");
 	}
